@@ -15,7 +15,9 @@ s.bind(('', port))
 print("Socket bound to %s" %(port))
 
 # put the socket into listening mode
-s.listen(5)
+# 1 connection only is allowed. More
+# incoming connections will be refused
+s.listen(1)
 print("Socket is listening")
 
 # run server forever until manually

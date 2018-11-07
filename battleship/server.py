@@ -25,10 +25,10 @@ print("Socket is listening")
 while True:
 	# establish connection with client
 	c, addr = s.accept()
-	print("Got connection from " + addr)
+	print("Got connection from ", addr)
 
 	# send a thank you msg to the client
-	c.send("Thank you for connecting")
+	c.send(bytes('Thank you for connecting\n', 'utf-8'))
 
 	# close the connection with the client
 	c.close()

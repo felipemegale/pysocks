@@ -2,7 +2,7 @@
 import socket
 
 # create a socket object
-s = socket.socket()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # define the port
 port = 1234

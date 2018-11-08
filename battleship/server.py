@@ -22,13 +22,17 @@ print("Socket is listening")
 
 # run server forever until manually
 # stopped or an error occurs
+
+# establish connection with client
+c, addr = s.accept()
+print("Got connection from ", addr)
+
 while True:
-	# establish connection with client
-	c, addr = s.accept()
-	print("Got connection from ", addr)
+	msg_from_cli = c.recv(2048).decode('utf-8')
 
-	# send a thank you msg to the client
-	c.send(bytes('Thank you for connecting\n', 'utf-8'))
-
-	# close the connection with the client
-	c.close()
+	if msg_from_cli != "stop" and msg_from_cli != "":
+		print(msg_from_cli)
+	else:
+		# send a thank you msg to the client
+		c.send(bytes('Thank you for connecting\n', 'utf-8'))
+		c.close() # close the connection with the client

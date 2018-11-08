@@ -1,3 +1,4 @@
+import random
 '''
 Board is 10 x 10
 Boats:
@@ -6,6 +7,16 @@ Boats:
     Destroyer: 3 blocks (3 per board)
     Submarine: 2 blocks (4 per board)
 
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
+e e e e e e e e e e
 '''
 class Board:
 
@@ -22,7 +33,14 @@ class Board:
     def place_carrier(self):
         # choose random row and column
         print("place_carrier")
-    
+
+        # generate random position on the board
+        i = random.randint(0,9)
+        j = random.randint(0,9)
+
+        if self.board[i][j] == 'e':
+            
+
     def place_tanker(self):
         # choose random row and column
         print("place_tanker")
@@ -54,6 +72,7 @@ class Board:
 def main():
     board = Board()
     board.print_board()
+    board.assemble_random_board()
 
 if __name__ == '__main__':
     main()

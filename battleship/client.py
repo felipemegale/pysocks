@@ -1,21 +1,19 @@
-# import socket module
 import socket
 
-# create a socket object
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# define the port
 port = 1234
 
-# connect to the server on local computer
-s.connect(('127.0.0.1', port))
+tcp.connect(('127.0.0.1', port))
 
-for _ in range(10):
-    # send something to server
-    s.send(bytes(input(), 'utf-8'))
-    
-# receive data from the server
-print(s.recv(1024).decode('utf-8'))
+print("Para sair use CTRL+X\n")
 
-# close the connection
-s.close()
+msg = input()
+
+while msg != 'stop':
+    tcp.send(bytes(msg, 'utf-8'))
+    msg_from_server = '<server> ' + tcp.recv(2048).decode('utf-8')
+    print(msg_from_server)
+    msg = input()
+
+tcp.close()

@@ -18,7 +18,7 @@ e e e e e e e e e e
 e e e e e e e e e e
 e e e e e e e e e e
 '''
-class Board:
+class Board(object):
 
     def print_board(self):
         for _list in self.board:

@@ -39,13 +39,47 @@ class Board:
             for _i in range(i, i+5):
                 self.board[_i][j] = 's'
     
-    def place_tankers(self):
-        print("placed tankers")
+    def place_tanker(self):
+        i,j = self.get_origin()
+        valid_j = False
+
+        # if origin position is not free
+        while self.board[i][j] != 'e':
+            i,j = self.get_origin()
+
+        # cant know if ship actually fits
+        while not valid_j:
+            # if can place to the right
+            if j <= 6:
+                # if there is space to place to the right
+                if (self.board[i][j+1] == 'e') and (self.board[i][j+2] == 'e') and (self.board[i][j+3] == 'e'):
+                    for _j in range(j, j+4):
+                        self.board[i][_j] = 's'
+                    valid_j = True
+                else:
+                    j = random.randint(0,9)
+                    while self.board[i][j] != 'e':
+                        j = random.randint(0,9)
+            # if can place to the left
+            else:
+                # if there is space to place to the left
+                if (self.board[i][j-1] == 'e') and (self.board[i][j-2] == 'e') and (self.board[i][j-3] == 'e'):
+                    for _j in range(j, j-4, -1):
+                        self.board[i][_j] = 's'
+                    valid_j = True
+                else:
+                    j = random.randint(0,9)
+                    while self.board[i][j] != 'e':
+                        j = random.randint(0,9)
+
+    def place_destroyer(self):
+        
     
     # server's board assembly
     def assemble_random_board(self):
         self.place_carrier()
-        self.place_tankers()
+        self.place_tanker()
+        self.place_tanker()
 
     def __init__(self):
         self.board = [['e' for i in range(10)] for j in range(10)]

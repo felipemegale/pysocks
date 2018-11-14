@@ -1,11 +1,30 @@
-J O O O O O O O O O O
-I O O O O O O O O O O
-H O O O O O O O O O O
-G O O O O O O O O O O
-F O O O O O O O O O O
-E O O O O O O O O O O
-D O O O O O O O O O O
-C O O O O O O O O O O
-B O O O O O O O O O O
-A O O O O O O O O O O
-  0 1 2 3 4 5 6 7 8 9
+G,6,C
+F,6,C
+E,6,C
+D,6,C
+C,6,C
+I,2,T
+I,3,T
+I,4,T
+I,5,T
+A,7,T
+A,8,T
+A,9,T
+A,10,T
+E,3,D
+D,3,D
+C,3,D
+J,10,D
+I,10,D
+H,10,D
+G,8,D
+F,8,D
+E,8,D
+G,2,S
+G,3,S
+A,2,S
+A,3,S
+C,9,S
+C,10,S
+H,7,S
+H,8,S

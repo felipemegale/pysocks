@@ -36,10 +36,10 @@ class Board(object):
 
         if i >= 5:
             for _i in range(5, 10):
-                self.board[_i][j] = 'c'
+                self.board[_i][j] = 'C'
         else:
             for _i in range(i, i+5):
-                self.board[_i][j] = 'c'
+                self.board[_i][j] = 'C'
     
     def place_tanker(self):
         i,j = self.get_origin()
@@ -56,7 +56,7 @@ class Board(object):
                 # if there is space to place to the right
                 if (self.board[i][j+1] == 'e') and (self.board[i][j+2] == 'e') and (self.board[i][j+3] == 'e'):
                     for _j in range(j, j+4):
-                        self.board[i][_j] = 't'
+                        self.board[i][_j] = 'T'
                     valid_j = True
                 else:
                     j = random.randint(0,9)
@@ -67,7 +67,7 @@ class Board(object):
                 # if there is space to place to the left
                 if (self.board[i][j-1] == 'e') and (self.board[i][j-2] == 'e') and (self.board[i][j-3] == 'e'):
                     for _j in range(j, j-4, -1):
-                        self.board[i][_j] = 't'
+                        self.board[i][_j] = 'T'
                     valid_j = True
                 else:
                     j = random.randint(0,9)
@@ -89,7 +89,7 @@ class Board(object):
                 # if there is space to place down
                 if (self.board[i+1][j] == 'e') and (self.board[i+2][j] == 'e'):
                     for _i in range(i, i+3):
-                        self.board[_i][j] = 'd'
+                        self.board[_i][j] = 'D'
                     valid_i = True
                 else:
                     i = random.randint(0,9)
@@ -100,7 +100,7 @@ class Board(object):
                 # if there is space to place up
                 if (self.board[i-1][j] == 'e') and (self.board[i-2][j] == 'e'):
                     for _i in range(i, i-3, -1):
-                        self.board[_i][j] = 'd'
+                        self.board[_i][j] = 'D'
                     valid_i = True
                 else:
                     i = random.randint(0,9)
@@ -122,7 +122,7 @@ class Board(object):
                 # if there is space to place to the right
                 if (self.board[i][j+1] == 'e'):
                     for _j in range(j, j+2):
-                        self.board[i][_j] = 's'
+                        self.board[i][_j] = 'S'
                     valid_j = True
                 else:
                     j = random.randint(0,9)
@@ -133,7 +133,7 @@ class Board(object):
                 # if there is space to place to the left
                 if (self.board[i][j-1] == 'e'):
                     for _j in range(j, j-2, -1):
-                        self.board[i][_j] = 's'
+                        self.board[i][_j] = 'S'
                     valid_j = True
                 else:
                     j = random.randint(0,9)

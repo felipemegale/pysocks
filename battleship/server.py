@@ -22,7 +22,7 @@ while True:
 		msg_to_cli = msg_from_cli
 
 		if not msg_from_cli: break
-		print("<client>",msg_from_cli)
+		print("<client> ",msg_from_cli)
 		c.send(bytes(msg_to_cli, 'utf-8')) # send something back to the client
 
 	print("End connection with", addr)	

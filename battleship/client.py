@@ -28,9 +28,8 @@ class client(object):
     def __init__(self):
         self.board = [['e' for i in range(10)] for j in range(10)]
         self.assemble_board()
-        #self.print_board()
 
-s_board = [['x' for i in range(10)] for j in range(10)]
+s_board = [['?' for i in range(10)] for j in range(10)]
 
 def print_server_board():
     for i in range(10):
@@ -65,11 +64,11 @@ def main():
             msg_from_server = '<server> ' + tcp.recv(2048).decode('utf-8')
             print(msg_from_server)
             
-            msg_from_server = msg_from_server.split(' ')
+            msg_from_server = msg_from_server.split(' ') # separate <server> from atk position
             msg_from_server = msg_from_server[1].split(',')
             
             lin = ord(msg_from_server[0])-65
-            col = chr(ord(msg_from_server[1]))
+            col = ord(msg_from_server[1])-1
             
             print(lin, col)
         msg = input("~ ")

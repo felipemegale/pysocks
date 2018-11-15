@@ -14,8 +14,9 @@ def main():
 
 	tcp.listen(1)
 	print("Socket is listening")
+	ship_qty = 30
 
-	while True:
+	while ship_qty > 0:
 		conn, addr = tcp.accept()
 		print("Got connection from ", addr)
 
@@ -39,7 +40,7 @@ def main():
 				# if that position in the board is not empty, means that the client has hit a ship
 				if (s_board.board[a_row][a_col] != 'e'):
 					s_board.board[a_row][a_col] = 'X'
-					s_board.ship_qty -= 1
+					ship_qty -= 1
 
 					_i,_j = random.randint(0,9), random.randint(0,9)
 					atks_performed.append((_i,_j))
@@ -51,7 +52,7 @@ def main():
 					_i,_j = random.randint(0,9), random.randint(0,9)
 					atks_performed.append((_i,_j))
 
-					s_atk = "miss," + str(chr(_i + 65)) + "," + str(_j)
+					s_atk = "miss," + str(chr(_i + 65)) + "," + str(_j+1)
 					conn.send(bytes(s_atk,'utf-8'))
 
 			# if its not the clients first atk
@@ -65,7 +66,7 @@ def main():
 					# if the client hits a servers ship
 					if (s_board.board[a_row][a_col] != 'e'):
 						s_board.board[a_row][a_col] = 'X'
-						s_board.ship_qty -= 1
+						ship_qty -= 1
 						
 						if (_j != 9):
 							s_atk = "hit," + str(chr(_i + 65)) + "," + str((_j+2))
@@ -106,7 +107,7 @@ def main():
 					# if the client hits a servers ship
 					if (s_board.board[a_row][a_col] != 'e'):
 						s_board.board[a_row][a_col] = 'X'
-						s_board.ship_qty -= 1
+						ship_qty -= 1
 
 						_i,_j = random.randint(0,9), random.randint(0,9)
 						while ((_i,_j) in atks_performed):

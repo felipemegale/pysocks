@@ -65,79 +65,92 @@ def main():
     msg = input("~ ")
 
     while cli.ship_qty > 0:
+
+        len_msg_spl = len(msg.split(','))
         
-        if msg == 'p' or msg == 'P':
-            print_boards(cli)
+        if len_msg_spl == 1:
+            if msg == 'p' or msg == 'P':
+                print_boards(cli)
 
-        elif msg == 'h' or msg == 'H':
-            print_help()
+            elif msg == 'h' or msg == 'H':
+                print_help()
 
-        else:
-            tcp.send(bytes(msg, 'utf-8'))
+            msg = input("~ ")
             
-            msg_from_server = tcp.recv(2048).decode('utf-8')
-            fmt_msg_serv = msg_from_server.split(',')
-            
-            # show servers response and atk
-            print("You %s! I attack on position (%s,%s)" % (fmt_msg_serv[0], fmt_msg_serv[1], fmt_msg_serv[2]))
+        elif len_msg_spl > 1:
+            if msg.split(',')[1] == 'p' or msg.split(',')[1] == 'P':
+                print_boards(cli)
 
-            msg_from_server = msg_from_server.split(',')
+            elif msg.split(',')[1] == 'h' or msg.split(',')[1] == 'H':
+                print_help()
 
-            if msg_from_server[0] == 'hit':
-                # process clients atk
-                msg = msg.split(',')
+            else:
+                tcp.send(bytes(msg, 'utf-8'))
+                
+                msg_from_server = tcp.recv(2048).decode('utf-8')
+                fmt_msg_serv = msg_from_server.split(',')
+                
+                # show servers response and atk
+                print("You %s! I attack on position (%s,%s)" % (fmt_msg_serv[0], fmt_msg_serv[1], fmt_msg_serv[2]))
 
-                if len(msg) == 2:
-                    row = ord(msg[0]) - 65
-                    col = int(msg[1]) - 1
-                else:
-                    row = ord(msg[1]) - 65
-                    col = int(msg[2]) - 1
+                msg_from_server = msg_from_server.split(',')
 
-                s_board[row][col] = 'H'
+                if msg_from_server[0] == 'hit':
+                    # process clients atk
+                    msg = msg.split(',')
 
-                # process servers atk
-                row = ord(msg_from_server[1]) - 65
-                col = int(msg_from_server[2]) - 1
+                    if len(msg) == 2:
+                        row = ord(msg[0]) - 65
+                        col = int(msg[1]) - 1
+                    else:
+                        row = ord(msg[1]) - 65
+                        col = int(msg[2]) - 1
 
-                # if the server hit a clients ship
-                if (cli.board[row][col] != 'e'):
-                    cli.board[row][col] = 'X'
-                    cli.ship_qty -= 1
-                    hit_or_miss = "hit,"
+                    s_board[row][col] = 'H'
 
-                # if the server misses
-                else:
-                    hit_or_miss = "miss,"
-                    # msg = "miss," + input("~ ")
+                    # process servers atk
+                    row = ord(msg_from_server[1]) - 65
+                    col = int(msg_from_server[2]) - 1
 
-            elif msg_from_server[0] == 'miss':
-                # process clients atk
-                msg = msg.split(',')
+                    # if the server hit a clients ship
+                    if (cli.board[row][col] != 'e'):
+                        cli.board[row][col] = 'X'
+                        cli.ship_qty -= 1
+                        hit_or_miss = "hit,"
 
-                if len(msg) == 2:
-                    row = ord(msg[0]) - 65
-                    col = int(msg[1]) - 1
-                else:
-                    row = ord(msg[1]) - 65
-                    col = int(msg[2]) - 1
+                    # if the server misses
+                    else:
+                        cli.board[row][col] = 'X'
+                        hit_or_miss = "miss,"
 
-                s_board[row][col] = 'm'
+                elif msg_from_server[0] == 'miss':
+                    # process clients atk
+                    msg = msg.split(',')
 
-                # process servers atk
-                row = ord(msg_from_server[1]) - 65
-                col = int(msg_from_server[2]) - 1
+                    if len(msg) == 2:
+                        row = ord(msg[0]) - 65
+                        col = int(msg[1]) - 1
+                    else:
+                        row = ord(msg[1]) - 65
+                        col = int(msg[2]) - 1
 
-                # if the server hit a clients ship
-                if (cli.board[row][col] != 'e'):
-                    cli.board[row][col] = 'X'
-                    cli.ship_qty -= 1
-                    hit_or_miss = "hit,"
-                # if the server misses
-                else:
-                    hit_or_miss = "miss,"
+                    s_board[row][col] = 'm'
 
-        msg = hit_or_miss + input("~ ")
+                    # process servers atk
+                    row = ord(msg_from_server[1]) - 65
+                    col = int(msg_from_server[2]) - 1
+
+                    # if the server hit a clients ship
+                    if (cli.board[row][col] != 'e'):
+                        cli.board[row][col] = 'X'
+                        cli.ship_qty -= 1
+                        hit_or_miss = "hit,"
+                    # if the server misses
+                    else:
+                        cli.board[row][col] = 'X'
+                        hit_or_miss = "miss,"
+
+            msg = hit_or_miss + input("~ ")
         
     tcp.close()
 

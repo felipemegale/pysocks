@@ -156,3 +156,4 @@ class Board(object):
     def __init__(self):
         self.board = [['e' for i in range(10)] for j in range(10)]
         self.assemble_random_board()
+        self.ship_qty = 30

@@ -60,7 +60,7 @@ def main():
     print("Conectou ao servidor")
 
     print("Para sair, digite 'stop'\n")
-    print("Para ajuda, entre 'h'")
+    print("Para ajuda, digite 'help' ou 'HELP'")
 
     msg = input("~ ")
 
@@ -72,7 +72,7 @@ def main():
             if msg == 'p' or msg == 'P':
                 print_boards(cli)
 
-            elif msg == 'h' or msg == 'H':
+            elif msg == 'help' or msg == 'HELP':
                 print_help()
 
             msg = input("~ ")
@@ -81,7 +81,7 @@ def main():
             if msg.split(',')[1] == 'p' or msg.split(',')[1] == 'P':
                 print_boards(cli)
 
-            elif msg.split(',')[1] == 'h' or msg.split(',')[1] == 'H':
+            elif msg.split(',')[1] == 'help' or msg.split(',')[1] == 'HELP':
                 print_help()
 
             else:
@@ -113,7 +113,7 @@ def main():
                     col = int(msg_from_server[2]) - 1
 
                     # if the server hit a clients ship
-                    if (cli.board[row][col] != 'e'):
+                    if (cli.board[row][col] != 'e') and (cli.board[row][col] != 'X'):
                         cli.board[row][col] = 'X'
                         cli.ship_qty -= 1
                         hit_or_miss = "hit,"
@@ -141,7 +141,7 @@ def main():
                     col = int(msg_from_server[2]) - 1
 
                     # if the server hit a clients ship
-                    if (cli.board[row][col] != 'e'):
+                    if (cli.board[row][col] != 'e') and (cli.board[row][col] != 'X'):
                         cli.board[row][col] = 'X'
                         cli.ship_qty -= 1
                         hit_or_miss = "hit,"

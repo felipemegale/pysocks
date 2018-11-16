@@ -69,8 +69,9 @@ def main():
 						ship_qty -= 1
 						
 						if (_j != 9):
-							s_atk = "hit," + str(chr(_i + 65)) + "," + str((_j+2))
-							atks_performed.append((_i,_j+1))
+							_j += 1
+							s_atk = "hit," + str(chr(_i + 65)) + "," + str((_j+1))
+							atks_performed.append((_i,_j))
 							conn.send(bytes(s_atk,'utf-8'))
 						
 						else:
@@ -85,8 +86,9 @@ def main():
 					# if the client missed
 					else:
 						if (_j != 9):
-							s_atk = "miss," + str(chr(_i + 65)) + "," + str((_j+2))
-							atks_performed.append((_i,_j+1))
+							_j += 1
+							s_atk = "miss," + str(chr(_i + 65)) + "," + str((_j+1))
+							atks_performed.append((_i,_j))
 							conn.send(bytes(s_atk,'utf-8'))
 						
 						else:
@@ -107,7 +109,7 @@ def main():
 					# if the client hits a servers ship
 					if (s_board.board[a_row][a_col] != 'e'):
 						s_board.board[a_row][a_col] = 'X'
-						ship_qty -= 1
+						s_board.ship_qty -= 1
 
 						_i,_j = random.randint(0,9), random.randint(0,9)
 						while ((_i,_j) in atks_performed):

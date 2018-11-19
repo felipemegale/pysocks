@@ -74,6 +74,10 @@ def main():
 
             elif msg == 'help' or msg == 'HELP':
                 print_help()
+            
+            elif msg == 'stop' or msg == 'STOP':
+            	tcp.close()
+            
 
             msg = input("~ ")
             
@@ -83,6 +87,9 @@ def main():
 
             elif msg.split(',')[1] == 'help' or msg.split(',')[1] == 'HELP':
                 print_help()
+            
+            elif msg.split(',')[1] == 'stop' or msg.split(',')[1] == 'STOP':
+            	tcp.close()
 
             else:
                 tcp.send(bytes(msg, 'utf-8'))

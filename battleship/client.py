@@ -77,6 +77,7 @@ def main():
             
             elif msg == 'stop' or msg == 'STOP':
             	tcp.close()
+            	break
             
 
             msg = input("~ ")
@@ -90,6 +91,7 @@ def main():
             
             elif msg.split(',')[1] == 'stop' or msg.split(',')[1] == 'STOP':
             	tcp.close()
+            	break
 
             else:
                 tcp.send(bytes(msg, 'utf-8'))

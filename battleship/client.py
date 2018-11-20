@@ -55,8 +55,9 @@ def main():
     print("Started client's board")
 
     tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    port = int(input("Enter port: "))
+    
     ip = input("Enter ip: ")
+    port = int(input("Enter port: "))
     tcp.connect((ip, port))
     print("Conectou ao servidor")
 

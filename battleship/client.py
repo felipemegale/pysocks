@@ -55,8 +55,9 @@ def main():
     print("Started client's board")
 
     tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    port = 1234
-    tcp.connect(('127.0.0.1', port))
+    port = int(input("Enter port: "))
+    ip = input("Enter ip: ")
+    tcp.connect((ip, port))
     print("Conectou ao servidor")
 
     print("Para sair, digite 'stop'\n")

@@ -7,7 +7,7 @@ def main():
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	print("Socket created successfully")
 
-	port = 1234
+	port = int(input("Enter port: "))
 
 	tcp.bind(('', port))
 	print("Socket bound to %s" %(port))

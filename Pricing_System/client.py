@@ -21,14 +21,14 @@ import socket
 #     def __init__(self):
 #         self.assemble_price()
 
-    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    port = 1234
+ip = input("Enter IP: ")
+port = int(input("Enter port: "))
 
+dest = (ip, port)
 
-dest = ('127.0.0.1', 1234)
-
-    print("Para sair use CTRL+X\n")
+print("Para sair use CTRL+X\n")
 
 
 msg = input()

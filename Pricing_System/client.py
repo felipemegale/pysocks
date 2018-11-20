@@ -8,6 +8,8 @@ import socket
 #     #            print("%c " %(el), end = '')
 #     #        print("")
 
+
+
 #     def assemble_price(self):
 #         assembly_file = open("user_price.txt", "r")
 
@@ -19,13 +21,15 @@ import socket
 #     def __init__(self):
 #         self.assemble_price()
 
-udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-port = 1234
+    port = 1234
+
 
 dest = ('127.0.0.1', 1234)
 
-print("Para sair use CTRL+X\n")
+    print("Para sair use CTRL+X\n")
+
 
 msg = input()
 

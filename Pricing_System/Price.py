@@ -2,13 +2,18 @@ from math import radians, cos, sin, asin, sqrt
 
 
 class Posto(object):
-    def __init__(self):
+    def __init__(self, fuel, price, lat, long):
         self.fuel = fuel
         self.price = price
         self.lat = lat
-        self.long = long 
+        self.long = long
 
 class Price(object):
+
+    def __init__(self):
+        self._list = []
+        # self.posto = Posto()
+        self.tratamento_dados()
 
     def tratamento_dados(self):
         assembly_file = open("user_price.txt", "r")
@@ -27,18 +32,19 @@ class Price(object):
             lat = [9:15]
             long = [16:22]"""
 
-            str = content[n]
+            line = n
 
-            if (str[:0] == 'D'):
+            if (line[:0] == 'D'):
                 arquivo = open('dados.txt', 'w')
-                arquivo.write(str)
+                arquivo.write(line)
+                arquivo.close()
 
-                (type, id_msg, fuel, price, lat, long) = str.split("-")
-                _list[n]= Posto(fuel, (price/1000), (lat/10000), (long/10000))
+                (_type, id_msg, fuel, price, lat, long) = line.split("-")
+                self._list.append(Posto(fuel, (price/1000), (lat/10000), (long/10000)))
 
             else :
                 (type, id_msg, fuel, raio, lat, long) = str.split("-")
-                pricing_system(fuel, raio, (lat/10000), (long/10000))
+                self.pricing_system(fuel, raio, (lat/10000), (long/10000))
 
         assembly_file.close()
 
@@ -47,13 +53,13 @@ class Price(object):
 
         menor_preco = 0
         
-        for n in _list:
-            if (fuel == _list[n].fuel) :
-                area = area_abrangencia(lat, _list[n].lat, long, _list[n].long)
+        for n in self._list:
+            if (fuel == self._list[n].fuel) :
+                area = area_abrangencia(lat, self._list[n].lat, long, self._list[n].long)
 
                 if (area <= raio) :
-                    if(_list[n].price < menor_preco) :
-                        menor_preco = _list[n].price
+                    if(self._list[n].price < menor_preco) :
+                        menor_preco = self._list[n].price
 
         print(menor_preco)
             
@@ -69,10 +75,4 @@ class Price(object):
         resp = aux * r
 
         return resp
-
-
-    def __init__(self):
-        _list = []
-        posto = Posto()
-        self.tratamento_dados()
 

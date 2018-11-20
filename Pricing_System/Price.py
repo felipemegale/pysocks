@@ -1,5 +1,13 @@
 from math import radians, cos, sin, asin, sqrt
 
+
+class Posto(object):
+    def __init__(self):
+        self.fuel = fuel
+        self.price = price
+        self.lat = lat
+        self.long = long 
+
 class Price(object):
 
     def tratamento_dados(self):
@@ -26,7 +34,7 @@ class Price(object):
                 arquivo.write(str)
 
                 (type, id_msg, fuel, price, lat, long) = str.split("-")
-                list[n]= Posto(fuel, (price/1000), (lat/10000), (long/10000))
+                _list[n]= Posto(fuel, (price/1000), (lat/10000), (long/10000))
 
             else :
                 (type, id_msg, fuel, raio, lat, long) = str.split("-")
@@ -39,13 +47,13 @@ class Price(object):
 
         menor_preco = 0
         
-        for n in list:
-            if (fuel == list[n].fuel) :
-                area = area_abrangencia(lat, list[n].lat, long, list[n].long)
+        for n in _list:
+            if (fuel == _list[n].fuel) :
+                area = area_abrangencia(lat, _list[n].lat, long, _list[n].long)
 
                 if (area <= raio) :
-                    if(list[n].price < menor_preco) :
-                        menor_preco = list[n].price
+                    if(_list[n].price < menor_preco) :
+                        menor_preco = _list[n].price
 
         print(menor_preco)
             
@@ -64,14 +72,7 @@ class Price(object):
 
 
     def __init__(self):
-        list = []
+        _list = []
         posto = Posto()
         self.tratamento_dados()
 
-
-class Posto(object):
-    def __init__(self):
-        self.fuel = fuel
-        self.price = price
-        self.lat = lat
-        self.long = long 

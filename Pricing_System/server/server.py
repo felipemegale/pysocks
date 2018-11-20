@@ -12,11 +12,12 @@ print("Socket bound to %s" %(port))
 print("Socket is listening")
 
 while True:
-	msg, client = udp.recvfrom(1024)
+	msg, client = udp.recvfrom(1024) # message is data or search
 	msg = msg.decode("utf-8")
 
 	if msg != "stop":
 		print (client, msg)
+		udp.sendto(bytes(msg, "utf-8"), client)
 	else:
 		udp.close()
 		break

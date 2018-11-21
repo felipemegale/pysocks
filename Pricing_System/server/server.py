@@ -79,7 +79,8 @@ print("Opened data file as append to store incoming new data")
 while True:
 	# message is data (D) or search (P)
 	msg, client = udp.recvfrom(1024)
-	msg_decode = msg.decode("utf-8") 
+	msg_decode = msg.decode("utf-8")
+	print("Client request: ",msg_decode)
 	msg_split = msg_decode.split("-")
 	d_or_p = msg_split[0].upper()
 
@@ -89,14 +90,16 @@ while True:
 		# if user is inputting data...
 		if d_or_p == "D":
 			udp.sendto(bytes(True, "utf-8"), client)
-			data_file.write(msg_decode)
-			new_data.append(msg_decode)
+			to_write = msg_split[1]+"-"+msg_split[2]+"-"+msg_split[3]+"-"+msg_split[4]
+			print("Writing '%s' to file..." %(to_write))
+			data_file.write(to_write)
+			new_data.append(to_write)
 		
 		# if the user is searching, need to look into old and new data
 		elif d_or_p == "P":
-			fuel_type = msg_split[1]
-			radius = msg_split[2]
-			orig = (msg_split[3],msg_split[4])
+			fuel_type = int(msg_split[1])
+			radius = int(msg_split[2])
+			orig = (int(msg_split[3]),int(msg_split[4]))
 
 			lowest_price_old = get_lowest_price_old_data(fuel_type,radius,orig)
 			lowest_price_new = get_lowest_price_new_data(fuel_type,radius,orig)

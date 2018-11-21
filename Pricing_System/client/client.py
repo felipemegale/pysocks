@@ -13,20 +13,19 @@ port = int(input("Enter port: "))
 
 dest = (ip, port)
 
-print("To add information: ")
-print("D-<fuel type>-<price * 1000>-<latitude>-<longitude>\n")
-
-print("To add information: ")
-print("P-<fuel type>-<search radius>-<center latitude>-<center longitude>\n\n")
+print("\nEnter h for help\n")
 
 msg = input("Enter the desired operation and data: ")
 
 while True:
     if msg == 'h' or msg == 'H':
-        print("To add information: ")
+        print("\nTo add information: ")
         print("D-<fuel type>-<price * 1000>-<latitude>-<longitude>\n")
-        print("To add information: ")
-        print("P-<fuel type>-<search radius>-<center latitude>-<center longitude>\n\n")
+        print("To search information: ")
+        print("P-<fuel type>-<search radius>-<center latitude>-<center longitude>\n")
+        print("Enter stop to stop the program\n\n")
+
+        msg = input("Enter the desired operation and data: ")
 
     elif msg != "stop":
         udp.sendto(bytes(msg, "utf-8"), dest)

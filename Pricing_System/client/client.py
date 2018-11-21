@@ -29,15 +29,21 @@ while True:
 
     elif msg != "stop":
         udp.sendto(bytes(msg, "utf-8"), dest)
+        udp.settimeout(2)
 
         try:
-            udp.settimeout(2)
-            msg, server = udp.recvfrom(1024)
-            print("Server: ",msg.decode("utf-8"))
+            server_msg, server = udp.recvfrom(1024)
+            print("Server: ",server_msg.decode("utf-8"))
         except socket.timeout:
             print("Timed out. Sending message again...")
             udp.sendto(bytes(msg, "utf-8"), dest)
-
+            
+            try:
+                server_msg, server = udp.recvfrom(1024)
+                print("Server: ",server_msg.decode("utf-8"))
+            except socket.timeout:
+                print("Time out. Nothing received from server")
+        
         msg = input("Enter the desired operation and data: ")
         
     else:

@@ -40,6 +40,7 @@ while True:
             udp.sendto(bytes(msg, "utf-8"), dest)
 
         msg = input("Enter the desired operation and data: ")
+        
     else:
         udp.close()
         break

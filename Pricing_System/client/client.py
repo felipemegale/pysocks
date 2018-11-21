@@ -13,12 +13,22 @@ port = int(input("Enter port: "))
 
 dest = (ip, port)
 
-print("Para sair use CTRL+X\n")
+print("To add information: ")
+print("D-<fuel type>-<price * 1000>-<latitude>-<longitude>\n")
 
-msg = input()
+print("To add information: ")
+print("P-<fuel type>-<search radius>-<center latitude>-<center longitude>\n\n")
+
+msg = input("Enter the desired operation and data: ")
 
 while True:
-    if msg != "stop":
+    if msg == 'h' or msg == 'H':
+        print("To add information: ")
+        print("D-<fuel type>-<price * 1000>-<latitude>-<longitude>\n")
+        print("To add information: ")
+        print("P-<fuel type>-<search radius>-<center latitude>-<center longitude>\n\n")
+
+    elif msg != "stop":
         udp.sendto(bytes(msg, "utf-8"), dest)
 
         try:
@@ -29,7 +39,7 @@ while True:
             print("Timed out. Sending message again...")
             udp.sendto(bytes(msg, "utf-8"), dest)
 
-        msg = input()
+        msg = input("Enter the desired operation and data: ")
     else:
         udp.close()
         break

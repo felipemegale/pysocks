@@ -1,7 +1,7 @@
 import random
 
 used_coords = []
-fil = open("input_data.txt", "w")
+fil = open("server_data.txt", "w")
 
 for i in range(0,5000):
     fuel_type = i % 3
@@ -22,7 +22,7 @@ for i in range(0,5000):
     
     used_coords.append((lat, lon))
 
-    data = "D-" +str(i)+ "-" +str(fuel_type)+ "-" +str(price)+ "-" +str(lat)+ "-" +str(lon)+ "\n"
+    data = str(fuel_type)+ "-" +str(price)+ "-" +str(lat)+ "-" +str(lon)+ "\n"
 
     fil.write(data)
 
